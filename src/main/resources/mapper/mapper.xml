@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.rowbounddemo.dao.BookMapper">
+
+    <resultMap id="BaseResultMap" type="com.example.rowbounddemo.bean.Book">
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="book_name" property="book_name" jdbcType="VARCHAR" />
+        <result column="book_author" property="bookAuthor" jdbcType="VARCHAR" />
+        <result column="create_date" property="create_date" jdbcType="VARCHAR" />
+        <result column="update_date" property="update_date" jdbcType="VARCHAR" />
+    </resultMap>
+
+
+<!--    <sql id="Base_Column_List">-->
+<!--          book_name as bookName, book_author as bookAuthor,-->
+<!--          create_date as createDate, update_date as updateDate-->
+<!--    </sql>-->
+
+    <insert id="insert"  keyColumn="id" keyProperty="id" parameterType="com.example.rowbounddemo.bean.Book" useGeneratedKeys="true">
+	  insert into book(id,book_name,book_author,create_date,update_date) values(#{id},#{book_name},#{book_author},#{create_date},#{update_date})
+	</insert>
+
+
+    <select id="selectBookByName" resultType="com.example.rowbounddemo.bean.Book">
+<!--        <bind name="pattern_bookName" value="'%' + bookName + '%'" />-->
+<!--        <bind name="pattern_bookAuthor" value="'%' + bookAuthor + '%'" />-->
+        select * from book where book_name=#{book_name}
+
+<!--        <if test="bookAuthor != null and bookAuthor !=''">-->
+<!--            and book_author LIKE #{bookAuthor}-->
+<!--        </if>-->
+    </select>
+
+
+</mapper>
